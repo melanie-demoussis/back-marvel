@@ -19,7 +19,21 @@ app.get("/characters", async (req, res) => {
     console.log(response.data);
     res.status(200).json(response.data);
 
-    console.log("ça fonctionne");
+    // console.log("ça fonctionne");
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+    console.log(error.message);
+  }
+});
+
+app.get("/comics/:characterId", async (req, res) => {
+  try {
+    const characterId = req.query.characterId || "";
+    const response = await axios.get(
+      `https://lereacteur-marvel-api.herokuapp.com/comics/:characterId=5fcf91f4d8a2480017b91453?apiKey=${process.env.MARVEL_API_KEY}`
+    );
+    console.log(response.data);
+    console.log("ca fontionne 2");
   } catch (error) {
     res.status(400).json({ message: error.message });
     console.log(error.message);
